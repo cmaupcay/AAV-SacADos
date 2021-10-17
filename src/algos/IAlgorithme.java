@@ -1,5 +1,6 @@
 package algos;
 
-public interface IAlgorithme {
-
+public interface IAlgorithme 
+{
+	
 }

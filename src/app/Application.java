@@ -1,11 +1,13 @@
 package app;
 
+import sac.SacADos;
+
 public class Application {
 
 	public static void main(String[] args) 
 	{
-		// TODO Auto-generated method stub
-
+		SacADos sad = new SacADos();
+		System.out.print(sad);
 	}
 
 }

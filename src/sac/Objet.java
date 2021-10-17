@@ -16,4 +16,13 @@ public class Objet
 		this._poids = poids;
 		this._valeur = valeur;
 	}
+	
+	public String toString()
+	{
+		StringBuilder s = new StringBuilder();
+		s.append(this._nom + " ; ");
+		s.append(this._poids + " ; ");
+		s.append(this._valeur);
+		return s.toString();
+	}
 }
