@@ -16,6 +16,12 @@ public class Objet
 		this._poids = poids;
 		this._valeur = valeur;
 	}
+	public Objet(Objet objet)
+	{
+		this._nom = objet.nom();
+		this._poids = objet.poids();
+		this._valeur = objet.valeur();
+	}
 	
 	public String toString()
 	{
