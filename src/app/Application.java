@@ -10,7 +10,7 @@ import sac.SacADos;
 
 abstract public class Application 
 {
-
+	// Arguments par défaut
 	private static final float POIDS_MAX = 7.f;
 	private static final Objet[] OBJETS()
 	{
@@ -30,14 +30,14 @@ abstract public class Application
 		SacADos sac = null;
 		StringBuilder methode = new StringBuilder();
 		
-		if (args.length == 0)
+		if (args.length == 0) // Sans arguments
 		{
 			sac = new SacADos();
 			sac.objets_possibles = OBJETS();
 			sac.modifier_poids_max(POIDS_MAX);
 			methode.append(METHODE);
 		}
-		else if (args.length >= 3)
+		else if (args.length >= 3) // Arguments définies et assez nombreux pour démarrer
 		{
 			try { sac = new SacADos(args[0], Float.parseFloat(args[1])); }
 			catch (IOException e) 
@@ -52,6 +52,7 @@ abstract public class Application
 				System.exit(-1);
 			}
 			
+			// Le nom de la méthode correspond à la concaténation de tous les arguments à partir du troisième
 			for (int i = 2; i < args.length; i++)
 			{
 				methode.append(args[i]);
@@ -65,6 +66,7 @@ abstract public class Application
 			System.exit(-1);
 		}
 		
+		// On défini quel algorithme utilisé selon la méthode indiquée
 		IAlgorithme algo = FAlgorithme.methode(methode.toString());
 		if (algo == null)
 		{
@@ -72,9 +74,12 @@ abstract public class Application
 			System.exit(-1);
 		}
 		
+		// Calcul de la proposition optimale
 		algo.resoudre(sac);
+		// Affichage des informations
 		System.out.print(sac);
 		
+		// Indique si le poids du sac n'est pas cohérent
 		try { sac.verifier_integrite(); }
 		catch (ExceptionSacTropRempli e)
 		{ System.err.println(e.getMessage()); }

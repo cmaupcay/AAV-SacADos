@@ -1,8 +1,40 @@
-Lampe ; 2.0 ; 30.0
-Sac de couchage ; 1.0 ; 20.0
-Camping gaz ; 3.0 ; 40.0
-Couteau suisse ; 0.2 ; 50.0
-4Snickers ; 0.1 ; 3.0
-Tente 2 secondes ; 3.0 ; 100.0
-Briquet ; 0.2 ; 3.0
-Coca ; 10.0 ; 20.0
+Piles ; 2.6 ; 5.2
+Sac de toile ; 0.5 ; 1.3
+Scotch ; 1.6 ; 0.1
+Oreiller ; 9.5 ; 9.8
+Couteau suisse ; 8.5 ; 3.2
+Ficelle ; 2.0 ; 7.8
+Sac poubelle ; 9.6 ; 4.6
+Torchons ; 1.6 ; 4.9
+Casseroles ; 6.7 ; 1.5
+Glaciere ; 9.8 ; 1.3
+Cuvette ; 15.2 ; 10.6
+Boite plastique ; 4.6 ; 9.5
+Eponge ; 1.6 ; 4.6
+Allumette ; 0.5 ; 0.9
+Bouteille ; 5.6 ; 7.9
+Ustensiles cuisine ; 9.8 ; 16.4
+Thermos ; 5.6 ; 7.5
+Tablier ; 1.2 ; 0.5
+Cafetiere ; 16.4 ; 20.3
+Planche a decouper ; 4.3 ; 8.4
+Boussole ; 0.8 ; 4.6
+Carte ; 9.4 ; 4.6
+Jumelles ; 3.4 ; 7.6
+Anti-moustique ; 1.2 ; 4.9
+Sandales ; 8.2 ; 1.5
+Livres ; 12.4 ; 5.1
+Bottes ; 4.2 ; 4.2
+Creme solaire ; 6.2 ; 7.5
+Switch ; 30 ; 10
+Lampe ; 2.0 ; 5.0
+Sac de couchage ; 3.0 ; 8.0
+Camping gaz ; 5.0 ; 14.0
+Boite alluminium ; 2.0 ; 6.0
+Tente ; 4.0 ; 13.0
+Roue ; 6.0 ; 17.0
+Trousse ; 3.0 ; 10.0
+Cartes ; 1.0 ; 4.0
+Briquet ; 1.0 ; 1.0
+Maillet ; 5.0 ; 5.0
+Trousse de toillette ; 6.0 ; 2.0
