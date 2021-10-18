@@ -11,7 +11,7 @@ public abstract class Application
 {
 	// Arguments par défaut
 	private static final double POIDS_MAX = 10.d;
-	private static final String FICHIER = "objets.txt";
+	private static final String FICHIER = "sujet.txt";
 	private static final String METHODE = "pse";
 	
 	public static void main(String[] args) 
