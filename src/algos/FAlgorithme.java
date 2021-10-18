@@ -11,8 +11,12 @@ public class FAlgorithme
 		methode = methode.toLowerCase();
 		switch (methode)
 		{
+		case "g":
+		case "glouton":
 		case "gloutonne":
 			return new Glouton();
+		case "d":
+		case "dynamique":
 		case "prog. dynamique":
 			return new Dynamique();
 		case "pse":

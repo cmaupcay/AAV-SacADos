@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import sac.Objet;
 
-abstract public class LecteurFichier 
+public abstract class LecteurFichier 
 {
 	public static Objet[] objets(String chemin) throws IOException
 	{
@@ -22,7 +22,7 @@ abstract public class LecteurFichier
 			infos = ligne.split(" ; ");
 			if (infos.length != 3) continue;
 			_objets.add(
-				new Objet(infos[0], Float.parseFloat(infos[1]), Float.parseFloat(infos[2]))
+				new Objet(infos[0], Double.parseDouble(infos[1]), Double.parseDouble(infos[2]))
 			);
 		}
 		fichier.close();

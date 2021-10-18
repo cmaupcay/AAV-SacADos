@@ -6,6 +6,10 @@ import sac.SacADos;
 
 public class Glouton implements IAlgorithme 
 {
+
+	@Override
+	public String nom() { return "Glouton"; }
+	
 	private Ratio[] _ratio_objets;
 	private void _inserer_ratio(int n, Objet objet)
 	{
@@ -25,10 +29,11 @@ public class Glouton implements IAlgorithme
 	@Override
 	public void resoudre(SacADos sac) 
 	{
+		if (sac.objets_possibles.length == 0) return;
 		this._ratio_objets = new Ratio[sac.objets_possibles.length];
 		for (int i = 0; i < sac.objets_possibles.length; i++)
 			this._inserer_ratio(i, sac.objets_possibles[i]);
-		float poids = 0.f;
+		double poids = 0.d;
 		for (int i = 0; i < sac.objets_possibles.length; i++)
 		{
 			poids += this._ratio_objets[i].objet.poids();

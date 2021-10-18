@@ -5,7 +5,7 @@ import sac.Objet;
 public class Ratio
 {
 	public Objet objet;
-	public final float valeur;
+	public final double valeur;
 	
 	public Ratio(Objet objet)
 	{

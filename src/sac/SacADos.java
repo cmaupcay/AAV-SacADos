@@ -9,27 +9,27 @@ public class SacADos
 {
 	public Objet[] objets_possibles;
 	
-	private float _poids_max;
-	public float poids_max() { return this._poids_max; }
-	public void modifier_poids_max(float poids_max) { this._poids_max = poids_max; }
+	private double _poids_max;
+	public double poids_max() { return this._poids_max; }
+	public void modifier_poids_max(double poids_max) { this._poids_max = poids_max; }
 	public void verifier_integrite() throws ExceptionSacTropRempli
 	{ 
-		float poids = this.poids();
+		double poids = this.poids();
 		if (this._poids_max < poids) 
 			throw new ExceptionSacTropRempli(poids, this._poids_max);
 	}
 	
 	public ArrayList<Objet> objets;
-	public float poids()
+	public double poids()
 	{
-		float poids = 0.f;
+		double poids = 0.d;
 		for (int i = 0; i < this.objets.size(); i++)
 			poids += this.objets.get(i).poids();
 		return poids;
 	}
-	public float valeur()
+	public double valeur()
 	{
-		float valeur = 0.f;
+		double valeur = 0.d;
 		for (int i = 0; i < this.objets.size(); i++)
 			valeur += this.objets.get(i).valeur();
 		return valeur;
@@ -40,7 +40,7 @@ public class SacADos
 		this._poids_max = 0;
 		this.objets = new ArrayList<>();
 	}
-	public SacADos(String chemin, float poids_max) throws IOException
+	public SacADos(String chemin, double poids_max) throws IOException
 	{
 		this._poids_max = poids_max;
 		this.objets = new ArrayList<>();

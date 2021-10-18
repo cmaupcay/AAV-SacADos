@@ -8,50 +8,34 @@ import sac.ExceptionSacTropRempli;
 import sac.Objet;
 import sac.SacADos;
 
-abstract public class Application 
+public abstract class Application 
 {
 	// Arguments par défaut
-	private static final float POIDS_MAX = 7.f;
-	private static final Objet[] OBJETS()
-	{
-		return new Objet[]{
-			new Objet("epée", 1.f, 2.3f),
-			new Objet("bouclier", 2.1f, 1.3f),
-			new Objet("gemme verte", 0.4f, 3.2f),
-			new Objet("gemme rouge", 0.98f, 6.3f),
-			new Objet("bois", 4.3f, 1.72f),
-			new Objet("plante", 1.87f, 1.98f)
-		};
-	}
-	private static final String METHODE = "gloutonne";
+	private static final double POIDS_MAX = 10.d;
+	private static final String FICHIER = "objets.txt";
+	private static final String METHODE = "d";
 	
 	public static void main(String[] args) 
 	{
-		SacADos sac = null;
+		String fichier = "";
+		double poids_max = 0.d;
 		StringBuilder methode = new StringBuilder();
 		
 		if (args.length == 0) // Sans arguments
 		{
-			sac = new SacADos();
-			sac.objets_possibles = OBJETS();
-			sac.modifier_poids_max(POIDS_MAX);
+			fichier = FICHIER;
+			poids_max = POIDS_MAX;
 			methode.append(METHODE);
 		}
 		else if (args.length >= 3) // Arguments définies et assez nombreux pour démarrer
 		{
-			try { sac = new SacADos(args[0], Float.parseFloat(args[1])); }
-			catch (IOException e) 
-			{
-				System.err.println("Erreur durant la lecture du fichier \"" + args[0] + "\".");
-				System.err.println(e.getMessage());
-				System.exit(-2);
-			}
+			fichier = args[0];
+			try { poids_max = Double.parseDouble(args[1]); }
 			catch (NumberFormatException e)
 			{
 				System.err.println("Le deuxième argument (" + args[1] + ") doit être un réel.");
 				System.exit(-1);
 			}
-			
 			// Le nom de la méthode correspond à la concaténation de tous les arguments à partir du troisième
 			for (int i = 2; i < args.length; i++)
 			{
@@ -65,6 +49,16 @@ abstract public class Application
 			System.err.println("Le nombre d'argument (" + args.length + ") n'est pas valide.");
 			System.exit(-1);
 		}
+
+		// On construit le sac
+		SacADos sac = null;
+		try { sac = new SacADos(fichier, poids_max); }
+		catch (IOException e) 
+		{
+			System.err.println("Erreur durant la lecture du fichier \"" + fichier + "\".");
+			System.err.println(e.getMessage());
+			System.exit(-2);
+		}
 		
 		// On défini quel algorithme utilisé selon la méthode indiquée
 		IAlgorithme algo = FAlgorithme.methode(methode.toString());
@@ -75,9 +69,12 @@ abstract public class Application
 		}
 		
 		// Calcul de la proposition optimale
+		long debut = System.nanoTime();
 		algo.resoudre(sac);
+		float temps = (System.nanoTime() - debut) / 1000000.f;
 		// Affichage des informations
 		System.out.print(sac);
+		System.out.println("Résolu avec l'algorithme " + algo.nom().toUpperCase() + " en " + temps + " ms.");
 		
 		// Indique si le poids du sac n'est pas cohérent
 		try { sac.verifier_integrite(); }
