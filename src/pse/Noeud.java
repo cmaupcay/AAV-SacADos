@@ -7,10 +7,6 @@ public class Noeud
 	public static int crees = 0;
 	
 	public int[] objets;
-
-	//private double _borne_sup;
-	//public double borne_sup() { return this._borne_sup; }
-	
 	private double _poids;
 	public double poids() { return this._poids; }
 	private double _valeur;
@@ -18,6 +14,9 @@ public class Noeud
 	
 	public Noeud fils_haut;
 	public Noeud fils_bas;
+	
+	private double _borne_sup;
+	public double borne_sup() { return this._borne_sup; }
 	
 	private void _creer_descendance(Objet[] objets_possibles, double poids_max, int index_objet)
 	{
@@ -34,12 +33,18 @@ public class Noeud
 		this._poids = 0.d;
 		this._valeur = 0.d;
 		
+		this._borne_sup = 0.d;
+		for (int i = 0; i < objets_possibles.length; i++)
+			this._borne_sup += objets_possibles[i].valeur();
+		
+		Noeud.crees = 0;
 		this._creer_descendance(objets_possibles, poids_max, 0);
 	}
 	public Noeud(Objet[] objets_possibles, double poids_max, Noeud pere, int index_objet, boolean inclure_objet)
 	{
 		this._poids = pere.poids();
 		this._valeur = pere.valeur();
+		this._borne_sup = pere.borne_sup();
 		
 		if (inclure_objet)
 		{
@@ -51,7 +56,10 @@ public class Noeud
 			this.objets[pere.objets.length] = index_objet;
 		}
 		else
+		{
+			this._borne_sup -= objets_possibles[index_objet].valeur();
 			this.objets = pere.objets;
+		}
 		
 		Noeud.crees++;
 		this._creer_descendance(objets_possibles, poids_max, index_objet + 1);
