@@ -4,12 +4,12 @@ import sac.Objet;
 
 public class Ratio
 {
-	public Objet objet;
+	public int index;
 	public final double valeur;
 	
-	public Ratio(Objet objet)
+	public Ratio(int index, Objet objet)
 	{
-		this.objet = objet;
+		this.index = index;
 		this.valeur = (objet.valeur() / objet.poids());
 	}
 }

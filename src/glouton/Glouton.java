@@ -11,10 +11,10 @@ public class Glouton implements IAlgorithme
 	public String nom() { return "Glouton"; }
 	
 	private Ratio[] _ratio_objets;
-	private void _inserer_ratio(int n, Objet objet)
+	private void _inserer_ratio(int index, Objet objet)
 	{
-		Ratio ratio = new Ratio(objet);
-		for (int i = 0; i < n; i++)
+		Ratio ratio = new Ratio(index, objet);
+		for (int i = 0; i < index; i++)
 		{
 			if (this._ratio_objets[i] != null && this._ratio_objets[i].valeur < ratio.valeur)
 			{
@@ -23,7 +23,7 @@ public class Glouton implements IAlgorithme
 				ratio = tmp;
 			}
 		}
-		this._ratio_objets[n] = ratio;
+		this._ratio_objets[index] = ratio;
 	}
 	
 	@Override
@@ -36,9 +36,9 @@ public class Glouton implements IAlgorithme
 		double poids = 0.d;
 		for (int i = 0; i < sac.objets_possibles.length; i++)
 		{
-			poids += this._ratio_objets[i].objet.poids();
+			poids += sac.objets_possibles[this._ratio_objets[i].index].poids();
 			if (poids <= sac.poids_max())
-				sac.objets.add(this._ratio_objets[i].objet);
+				sac.objets.add(sac.objets_possibles[this._ratio_objets[i].index]);
 			else break;
 		}
 	}
