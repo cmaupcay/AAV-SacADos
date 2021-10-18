@@ -7,12 +7,12 @@ import sac.SacADos;
 public class Dynamique implements IAlgorithme 
 {
 	// La précision s'applique au poids, car il est nécessairement convertit en entier
-	private static final int PRECISION = 1;
+	private static final int PRECISION = 10;
 	private static int _index(double poids)
 	{ return (int)Math.round(poids) * PRECISION; }
 
 	@Override
-	public String nom() { return "Programmation Dynamique (Précision: " + (1.d / PRECISION) + ")"; }
+	public String nom() { return "Programmation Dynamique (Précision : " + (1.d / PRECISION) + ")"; }
 	
 	private static double[][] _matrice(double poids_max, Objet[] objets)
 	{
@@ -21,13 +21,16 @@ public class Dynamique implements IAlgorithme
 		int poids_entier = 0;
 		for (int i = 0; i < objets.length; i++)
 		{
+			poids_entier = _index(objets[i].poids());
 			for (int j = 0; j < j_max; j++)
 			{
-				if (i == 0) 
-					matrice[i][j] = 0.d;
+				if (i == 0)
+				{
+					if (poids_entier <= j) matrice[i][j] = objets[i].valeur();
+					else matrice[i][j] = 0;
+				}
 				else
 				{
-					poids_entier = _index(objets[i].poids());
 					if (poids_entier <= j) 
 					{
 						matrice[i][j] = Math.max(
@@ -45,7 +48,7 @@ public class Dynamique implements IAlgorithme
 	private static int _poids_optimal(double[][] matrice)
 	{
 		final int i = matrice.length - 1; 
-		int j = matrice[0].length - 1;
+		int j = matrice[i].length - 1;
 		while (matrice[i][j] == matrice[i][j - 1]) j--;
 		return j;
 	}
