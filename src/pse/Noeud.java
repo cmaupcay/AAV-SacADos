@@ -23,7 +23,8 @@ public class Noeud
 	{
 		if (index_objet < objets_possibles.length)
 		{
-			this.fils_haut = new Noeud(objets_possibles, poids_max, this, index_objet, true);
+			if ((this._poids + objets_possibles[index_objet].poids()) <= poids_max)
+				this.fils_haut = new Noeud(objets_possibles, poids_max, this, index_objet, true);
 			this.fils_bas = new Noeud(objets_possibles, poids_max, this, index_objet, false);
 		}
 	}
@@ -33,7 +34,6 @@ public class Noeud
 		this._poids = 0.d;
 		this._valeur = 0.d;
 		
-		Noeud.crees = 1;		
 		this._creer_descendance(objets_possibles, poids_max, 0);
 	}
 	public Noeud(Objet[] objets_possibles, double poids_max, Noeud pere, int index_objet, boolean inclure_objet)

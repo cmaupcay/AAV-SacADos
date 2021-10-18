@@ -13,13 +13,17 @@ public class PSE implements IAlgorithme
 
 	private Noeud _rechercher_solution(Noeud noeud, double poids_max)
 	{
-		if (noeud.fils_haut == null || noeud.fils_bas == null)
-			return noeud;
+		Noeud h = null;
+		if (noeud.fils_haut == null)
+		{
+			if (noeud.fils_bas == null) return noeud;
+			h = noeud;
+		}
+		else h = _rechercher_solution(noeud.fils_haut, poids_max);
 		this._noeuds_parcourus++;
 		
-		Noeud h = _rechercher_solution(noeud.fils_haut, poids_max);
 		Noeud b = _rechercher_solution(noeud.fils_bas, poids_max);
-		if ((h.poids() <= poids_max) && (h.valeur() > b.valeur())) return h;
+		if (h.valeur() > b.valeur()) return h;
 		else return b;
 	}
 	
