@@ -6,14 +6,11 @@ public class Noeud
 {
 	public static int crees = 0;
 	
-	public int profondeur;
 	public int[] objets;
 
-	private double _borne_sup;
-	public double borne_sup() { return this._borne_sup; }
+	//private double _borne_sup;
+	//public double borne_sup() { return this._borne_sup; }
 	
-	private boolean _valide;
-	public boolean valide() { return this._valide; }
 	private double _poids;
 	public double poids() { return this._poids; }
 	private double _valeur;
@@ -22,61 +19,41 @@ public class Noeud
 	public Noeud fils_haut;
 	public Noeud fils_bas;
 	
-	private void _creer_fils(Objet[] objets_possibles, double poids_max)
+	private void _creer_descendance(Objet[] objets_possibles, double poids_max, int index_objet)
 	{
-		if (this._valide && (this.profondeur + 1 < objets_possibles.length))
+		if (index_objet < objets_possibles.length)
 		{
-			this.fils_haut = new Noeud(objets_possibles, poids_max, this, true);
-			this.fils_bas = new Noeud(objets_possibles, poids_max, this, false);
-		}
-		else
-		{
-			this.fils_haut = null;
-			this.fils_bas = null;
+			this.fils_haut = new Noeud(objets_possibles, poids_max, this, index_objet, true);
+			this.fils_bas = new Noeud(objets_possibles, poids_max, this, index_objet, false);
 		}
 	}
-	
 	public Noeud(Objet[] objets_possibles, double poids_max) 
 	{
-		this.profondeur = 0;
 		this.objets = new int[0];
 		this._poids = 0.d;
 		this._valeur = 0.d;
-		this._valide = true;
-
-		this._borne_sup = 0.d;
-		for (int i = 0; i < objets_possibles.length; i++)
-			this._borne_sup += objets_possibles[i].valeur();
 		
 		Noeud.crees = 1;		
-		this._creer_fils(objets_possibles, poids_max);
+		this._creer_descendance(objets_possibles, poids_max, 0);
 	}
-	public Noeud(Objet[] objets_possibles, double poids_max, Noeud pere, boolean inclure_objet)
+	public Noeud(Objet[] objets_possibles, double poids_max, Noeud pere, int index_objet, boolean inclure_objet)
 	{
-		this.profondeur = pere.profondeur + 1;
 		this._poids = pere.poids();
 		this._valeur = pere.valeur();
-		this._borne_sup = pere.borne_sup();
 		
 		if (inclure_objet)
 		{
-			this._poids += objets_possibles[profondeur].poids();
-			this._valide = this._poids <= poids_max;
-			if (!this._valide) return;
-			this._valeur += objets_possibles[profondeur].valeur();
+			this._poids += objets_possibles[index_objet].poids();
+			this._valeur += objets_possibles[index_objet].valeur();
 			this.objets = new int[pere.objets.length + 1];
 			for (int i = 0; i < pere.objets.length; i++)
 				this.objets[i] = pere.objets[i];
-			this.objets[pere.objets.length] = profondeur;
+			this.objets[pere.objets.length] = index_objet;
 		}
 		else
-		{
 			this.objets = pere.objets;
-			this._valide = pere.valide();
-			this._borne_sup -= objets_possibles[profondeur].valeur();
-		}
 		
 		Noeud.crees++;
-		this._creer_fils(objets_possibles, poids_max);
+		this._creer_descendance(objets_possibles, poids_max, index_objet + 1);
 	}
 }
