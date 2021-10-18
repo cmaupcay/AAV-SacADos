@@ -1,0 +1,12 @@
+Coca ; 10 ; 20
+Chips ; 1 ; 2
+Shorts ; 1 ; 24
+Chaussures ; 2 ; 80
+Lampe ; 3 ; 35
+Sac de couchage ; 4 ; 60
+Camping gaz ; 1 ; 40
+Couteau suisse ; 1 ; 50
+iPhone ; 2 ; 200
+Mars ; 1 ; 3
+Tente 2 secondes + ; 10 ; 100
+Lingot d'or ; 10 ; 1000
