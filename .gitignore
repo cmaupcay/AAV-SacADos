@@ -1,7 +1,5 @@
-.settings\
+*.prefs
 bin\
-.classpath
-.project
 
 # Compiled class file
 *.class

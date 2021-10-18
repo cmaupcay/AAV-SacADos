@@ -5,7 +5,6 @@ import java.io.IOException;
 import algos.FAlgorithme;
 import algos.IAlgorithme;
 import sac.ExceptionSacTropRempli;
-import sac.Objet;
 import sac.SacADos;
 
 public abstract class Application 
@@ -73,7 +72,7 @@ public abstract class Application
 		algo.resoudre(sac);
 		float temps = (System.nanoTime() - debut) / 1000000.f;
 		// Affichage des informations
-		System.out.print(sac);
+		System.out.println(sac);
 		System.out.println("Résolu avec l'algorithme " + algo.nom().toUpperCase() + " en " + temps + " ms.");
 		
 		// Indique si le poids du sac n'est pas cohérent
