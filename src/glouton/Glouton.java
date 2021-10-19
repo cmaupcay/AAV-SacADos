@@ -8,9 +8,16 @@ public class Glouton implements IAlgorithme
 {
 
 	@Override
-	public String nom() { return "Glouton"; }
+	public String nom() 
+	{ 
+		if (INSERTION) return "Glouton par insertion";
+		return "Glouton rapide (pivot " + (TriRapide.PIVOT_ALEATOIRE ? "aléatoire" : "constant") + ")"; 
+	}
+
+	private static final boolean INSERTION = false;
 	
 	private Ratio[] _ratio_objets;
+	
 	private void _inserer_ratio(int index, Objet objet)
 	{
 		Ratio ratio = new Ratio(index, objet);
@@ -31,8 +38,19 @@ public class Glouton implements IAlgorithme
 	{
 		if (sac.objets_possibles.length == 0) return;
 		this._ratio_objets = new Ratio[sac.objets_possibles.length];
-		for (int i = 0; i < sac.objets_possibles.length; i++)
-			this._inserer_ratio(i, sac.objets_possibles[i]);
+		
+		if (INSERTION)
+		{
+			for (int i = 0; i < sac.objets_possibles.length; i++)
+				this._inserer_ratio(i, sac.objets_possibles[i]);
+		}
+		else // Tri rapide
+		{
+			for (int i = 0; i < sac.objets_possibles.length; i++)
+				this._ratio_objets[i] = new Ratio(i, sac.objets_possibles[i]);
+			TriRapide.trier(this._ratio_objets);
+		}
+		
 		double poids = 0.d;
 		for (int i = 0; i < sac.objets_possibles.length; i++)
 		{
