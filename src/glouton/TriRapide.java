@@ -2,50 +2,52 @@ package glouton;
 
 import java.util.Random;
 
-public abstract class TriRapide 
+import sac.Objet;
+
+public class TriRapide extends Tri
 {
-	public static void echanger(Ratio[] ratio, int a, int b)
-	{
-		Ratio tmp = ratio[a];
-		ratio[a] = ratio[b];
-		ratio[b] = tmp;
-	}
+	@Override
+	public String nom() { return "rapide (pivot " + (PIVOT_ALEATOIRE ? "aléatoire" : "constant") + ")"; }
+	public static final boolean PIVOT_ALEATOIRE = true;
 	
-	private static int _partitionner(Ratio[] ratio, int debut, int fin, int pivot) 
+	private static int _partitionner(Ratio[] ratio, int debut, int fin, int pivot, Objet[] objets) 
 	{
-		echanger(ratio, pivot, fin);
+		Tri.echanger(ratio, pivot, fin);
 		int j = debut;
 		for (int i = debut; i < fin; i++)
 		{
-			if (ratio[i].valeur > ratio[fin].valeur)
+			if (ratio[i].superieur(ratio[fin], objets))
 			{
-				echanger(ratio, i, j);
+				Tri.echanger(ratio, i, j);
 				j++;
 			}
 		}
-		echanger(ratio, fin, j);
+		Tri.echanger(ratio, fin, j);
 		return j;
 	}
 
-	public static final boolean PIVOT_ALEATOIRE = true;
-	
 	private static int _choisir_pivot(int debut, int fin) 
 	{
 		if (PIVOT_ALEATOIRE) return (Math.abs((new Random()).nextInt()) % (fin - debut)) + debut;
 		return debut;
 	}
 	
-	private static void _tri(Ratio[] ratio, int debut, int fin)
+	private static void _tri(Ratio[] ratio, int debut, int fin, Objet[] objets)
 	{
 		if (debut < fin)
 		{
 			int pivot = _choisir_pivot(debut, fin);
-			pivot = _partitionner(ratio, debut, fin, pivot);
-            _tri(ratio, debut, pivot - 1);
-            _tri(ratio, pivot + 1, fin);
+			pivot = _partitionner(ratio, debut, fin, pivot, objets);
+            _tri(ratio, debut, pivot - 1, objets);
+            _tri(ratio, pivot + 1, fin, objets);
 		}
 	}
 
-	public static void trier(Ratio[] ratios)
-	{ _tri(ratios, 0, ratios.length - 1); }
+	@Override
+	public void trier(Ratio[] ratios, Objet[] objets)
+	{
+		for (int i = 0; i < objets.length; i++)
+			ratios[i] = new Ratio(i, objets[i]);
+		_tri(ratios, 0, ratios.length - 1, objets);
+	}
 }

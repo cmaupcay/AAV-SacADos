@@ -12,4 +12,10 @@ public class Ratio
 		this.index = index;
 		this.valeur = (objet.valeur() / objet.poids());
 	}
+	
+	public boolean superieur(Ratio b, Objet[] objets) // this plus interessant que b
+	{
+		if (this.valeur > b.valeur) return true;
+		else return (this.valeur == b.valeur && objets[this.index].poids() > objets[b.index].poids());
+	}
 }

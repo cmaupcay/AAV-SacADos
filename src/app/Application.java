@@ -12,7 +12,7 @@ public abstract class Application
 	// Arguments par défaut
 	private static final double POIDS_MAX = 20.d;
 	private static final String FICHIER = "txt/eval.txt";
-	private static final String METHODE = "glouton";
+	private static final String METHODE = "pse";
 	
 	public static void main(String[] args) 
 	{
@@ -58,6 +58,9 @@ public abstract class Application
 			System.err.println(e.getMessage());
 			System.exit(-2);
 		}
+		
+		if (sac.objets_possibles.length == 0)
+			System.err.println("/!\\ Aucun objet défini.");
 		
 		// On défini quel algorithme utilisé selon la méthode indiquée
 		IAlgorithme algo = FAlgorithme.methode(methode.toString());
